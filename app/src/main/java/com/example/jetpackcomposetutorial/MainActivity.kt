@@ -3,6 +3,7 @@ package com.example.jetpackcomposetutorial
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -23,14 +24,16 @@ data class Message(val author: String, val body: String)
 
 @Composable
 fun MessageCard(msg: Message) {
-    Text(msg.author)
-    Text(msg.body)
+    Column() {
+        Text(text = msg.author)
+        Text(text = msg.body)
+    }
 }
 
 @Preview
 @Composable
 fun PreviewMessageCard() {
     MessageCard(
-        Message("Colleague", "Hey, take a look at Jetpack Compose, it's great!")
+        msg = Message("Colleague", "Hey, take a look at Jetpack Compose, it's great!")
     )
 }
