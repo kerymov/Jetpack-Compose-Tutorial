@@ -8,6 +8,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -19,15 +21,14 @@ import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.compose.tutorial.SampleData
 import com.example.jetpackcomposetutorial.ui.theme.JetpackComposeTutorialTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            JetpackComposeTutorialTheme {
-                MessageCard(Message("Android", "Jetpack Compose"))
-            }
+            Conversation(SampleData.conversationSample)
         }
     }
 }
@@ -68,6 +69,15 @@ fun MessageCard(msg: Message) {
     }
 }
 
+@Composable
+fun Conversation(messages: List<Message>) {
+    LazyColumn {
+        items(messages) { message ->
+            MessageCard(message)
+        }
+    }
+}
+
 @Preview(name = "Light Mode")
 @Preview(
     uiMode = Configuration.UI_MODE_NIGHT_YES,
@@ -75,10 +85,8 @@ fun MessageCard(msg: Message) {
     name = "Dark Mode"
 )
 @Composable
-fun PreviewMessageCard() {
+fun PreviewConversation() {
     JetpackComposeTutorialTheme {
-        MessageCard(
-            msg = Message("Colleague", "Hey, take a look at Jetpack Compose, it's great!")
-        )
+        Conversation(SampleData.conversationSample)
     }
 }
