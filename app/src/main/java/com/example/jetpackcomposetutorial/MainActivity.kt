@@ -35,7 +35,7 @@ data class Message(val author: String, val body: String)
 
 @Composable
 fun MessageCard(msg: Message) {
-    Row {
+    Row(modifier = Modifier.padding(all = 8.dp)) {
         Image(
             painter = painterResource(id = R.drawable.image_1),
             contentDescription = "Contact profile picture",
